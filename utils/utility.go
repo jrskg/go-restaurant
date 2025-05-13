@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func ApiError(c *gin.Context, code int, err error) {
@@ -47,4 +48,13 @@ func ValidateAndParseTime(timeStr string) (time.Time, error) {
 		return time.Time{}, fmt.Errorf("invalid time format")
 	}
 	return parsedTime.UTC(), nil
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	return string(bytes), err
+}
+
+func VerifyPassword(password, hashPassword string) bool {
+	return bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password)) == nil
 }

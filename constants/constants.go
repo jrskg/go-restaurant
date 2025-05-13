@@ -7,4 +7,6 @@ const (
 	ORDER_COLLECTION      = "order"
 	TABLE_COLLECTION      = "table"
 	ORDER_ITEM_COLLECTION = "order_item"
+	USER_COLLECTION       = "user"
+	INVOICE_COLLECTION    = "invoice"
 )

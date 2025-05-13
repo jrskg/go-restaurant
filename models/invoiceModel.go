@@ -14,5 +14,10 @@ type Invoice struct {
 	PaymentDueDate time.Time     `bson:"paymentDueDate" json:"paymentDueDate"`
 	CreatedAt      time.Time     `bson:"createdAt" json:"createdAt"`
 	UpdatedAt      time.Time     `bson:"updatedAt" json:"updatedAt"`
-	OrderId        string        `bson:"orderId" json:"orderId"`
+	OrderId        string        `bson:"orderId" json:"orderId" validate:"required"`
+}
+
+type UpdateInvoiceDto struct {
+	PaymentMethod *string `json:"paymentMethod" validate:"eq=CASH|eq=CARD|ep="`
+	PaymentStatus *string `json:"paymentStatus" validate:"eq=PAID|eq=PENDING"`
 }

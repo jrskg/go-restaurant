@@ -18,3 +18,8 @@ type User struct {
 	UpdatedAt    time.Time     `bson:"updatedAt" json:"updatedAt"`
 	UserId       string        `bson:"userId" json:"userId"`
 }
+
+type LoginDto struct {
+	Email    *string `bson:"email" json:"email" validate:"email,required"`
+	Password *string `bson:"password" json:"password" validate:"required"`
+}
