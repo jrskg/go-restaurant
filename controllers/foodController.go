@@ -108,7 +108,7 @@ func UpdateFood() gin.HandlerFunc {
 		updateObj := bson.M{"updatedAt": time.Now().UTC()}
 
 		for k, v := range updateFields {
-			if v != nil {
+			if !utils.IsNil(v) {
 				updateObj[k] = v
 			}
 		}

@@ -41,6 +41,11 @@ func CreateOrderItem() gin.HandlerFunc {
 			return
 		}
 
+		if orderItemPack.TableId == nil || len(orderItemPack.OrderItems) < 1 {
+			utils.ApiError(c, http.StatusBadRequest, errors.New("tableId or orderItems is empty"))
+			return
+		}
+
 		order.OrderDate = time.Now().UTC()
 		order.TableId = *orderItemPack.TableId
 		createdOrderId, err := OrderItemOrderCreator(order)
@@ -116,7 +121,7 @@ func UpdateOrderItem() gin.HandlerFunc {
 		}
 		updateObj := bson.M{"updatedAt": time.Now().UTC()}
 		for k, v := range fieldsToUpdate {
-			if v != nil {
+			if !utils.IsNil(v) {
 				updateObj[k] = v
 			}
 		}

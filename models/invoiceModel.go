@@ -9,7 +9,7 @@ import (
 type Invoice struct {
 	ID             bson.ObjectID `bson:"_id" json:"_id"`
 	InvoiceId      string        `bson:"invoiceId" json:"invoiceId"`
-	PaymentMethod  *string       `bson:"paymentMethod" json:"paymentMethod" validate:"eq=CASH|eq=CARD|ep="`
+	PaymentMethod  *string       `bson:"paymentMethod" json:"paymentMethod" validate:"eq=CASH|eq=CARD|eq="`
 	PaymentStatus  *string       `bson:"paymentStatus" json:"paymentStatus" validate:"eq=PAID|eq=PENDING"`
 	PaymentDueDate time.Time     `bson:"paymentDueDate" json:"paymentDueDate"`
 	CreatedAt      time.Time     `bson:"createdAt" json:"createdAt"`
@@ -18,6 +18,6 @@ type Invoice struct {
 }
 
 type UpdateInvoiceDto struct {
-	PaymentMethod *string `json:"paymentMethod" validate:"eq=CASH|eq=CARD|ep="`
+	PaymentMethod *string `json:"paymentMethod" validate:"eq=CASH|eq=CARD|eq="`
 	PaymentStatus *string `json:"paymentStatus" validate:"eq=PAID|eq=PENDING"`
 }

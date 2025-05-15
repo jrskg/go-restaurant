@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -57,4 +58,17 @@ func HashPassword(password string) (string, error) {
 
 func VerifyPassword(password, hashPassword string) bool {
 	return bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password)) == nil
+}
+
+func IsNil(i any) bool {
+	if i == nil {
+		return true
+	}
+	v := reflect.ValueOf(i)
+	switch v.Kind() {
+	case reflect.Ptr, reflect.Interface, reflect.Slice, reflect.Map, reflect.Func:
+		return v.IsNil()
+	default:
+		return false
+	}
 }
