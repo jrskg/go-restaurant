@@ -218,3 +218,18 @@ func GetAllOrders() gin.HandlerFunc {
 		utils.ApiSuccess(c, http.StatusOK, allOrders, "Orders fetched successfully")
 	}
 }
+
+func OrderItemOrderCreator(order models.Order) (string, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	order.CreatedAt = time.Now().UTC()
+	order.UpdatedAt = time.Now().UTC()
+	order.ID = bson.NewObjectID()
+	order.OrderID = order.ID.Hex()
+
+	_, err := orderCollection.InsertOne(ctx, order)
+	if err != nil {
+		return "", err
+	}
+	return order.OrderID, nil
+}

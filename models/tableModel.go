@@ -14,3 +14,8 @@ type Table struct {
 	UpdatedAt      time.Time     `bson:"updatedAt" json:"updatedAt"`
 	TableId        string        `bson:"tableId" json:"tableId"`
 }
+
+type UpdateTableDto struct {
+	NumberOfGuests *int `json:"numberOfGuests"`
+	TableNumber    *int `json:"tableNumber"`
+}

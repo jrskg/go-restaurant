@@ -16,3 +16,9 @@ type OrderItem struct {
 	OrderId     string        `bson:"orderId" json:"orderId" validate:"required"`
 	FoodId      string        `bson:"foodId" json:"foodId" validate:"required"`
 }
+
+type UpdateOrderItemDto struct {
+	Quantity  *string  `json:"quantity,omitempty" validate:"omitempty,required,eq=S|eq=M|eq=L"`
+	UnitPrice *float64 `json:"unitPrice,omitempty" validate:"omitempty,required"`
+	FoodId    *string  `json:"foodId,omitempty" validate:"omitempty,required"`
+}
